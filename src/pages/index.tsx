@@ -54,6 +54,10 @@ export default function Home(): JSX.Element {
   const [blockList, setBlockList] = useState(defaultBlocks);
   const [activeIndex, setActiveIndex] = useState(-1);
   const toasterRef = useRef(null);
+  const [data, setData] = useState('');
+  const sitetoIndex = (childdata) => {
+    setData(childdata);
+  }
 
   useEffect(() => {
     async function getBlocks() {
@@ -108,15 +112,17 @@ export default function Home(): JSX.Element {
         <title>Site Builder</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <AppContainer>
         <Toaster ref={toasterRef} />
-        <BlockPicker addBlock={addBlock} />
+        {data !== 'Hide SideBar' &&
+            <BlockPicker addBlock={addBlock} />
+        }        
         <Site
           activeIndex={activeIndex}
           blockList={blockList}
           removeBlock={removeBlock}
           setActiveIndex={setActiveIndex}
+          sitetoIndex={sitetoIndex}
         />
       </AppContainer>
     </div>
