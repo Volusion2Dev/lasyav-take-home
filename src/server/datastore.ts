@@ -28,3 +28,16 @@ export async function getBlocks(): Promise<Block[]> {
     configData: JSON.parse(row.data)
   }));
 }
+
+export async function createBlocks(): Promise<Block[]> {
+  const result = await db.many(
+    `INSERT INTO site_builder.block(id,block_type,position,JSON.parse(row.data)) VALUES (?, ?)
+    RETURNING *`
+  );
+  return result.map((row: any) => ({
+    id: row.id,
+    type: row.block_type,
+    position: row.position,
+    configData: JSON.parse(row.data)
+  }));
+}

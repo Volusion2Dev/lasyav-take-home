@@ -8,3 +8,8 @@ export async function getBlocks(): Promise<Block[]> {
   const resp = await axios.get(blocksApiUrl);
   return resp.data;
 }
+
+export async function createBlocks(req,res): Promise<Block[]> {
+  const resp = await axios.post('/blocksApiUrl');
+  return resp.data;
+}

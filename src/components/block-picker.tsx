@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Button } from "@blueprintjs/core";
 
@@ -44,6 +44,33 @@ const StyledButton = styled(Button)`
   width: 80%;
 `;
 
+const CreateButton = styled(Button)`
+  background-color: #9fb3c8 !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: #102a43 !important;
+  font-weight: bold;
+  margin: 25rem auto 0px auto;
+  padding: 10px;
+  width: 80%;
+`;
+
+const createBlock = () => {
+  console.log('create')
+  const block = {
+    position :3, 
+    type: 'body', 
+    configData: null};
+
+  fetch('http://localhost:3000/blocks', {
+    method: 'POST',
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(block)
+  }).then(() => {
+    console.log('new block added')
+  })
+}
+
 interface BlockPickerProps {
   addBlock: (blockName: string) => void;
   className?: string;
@@ -65,6 +92,9 @@ const BlockPicker: React.FunctionComponent<BlockPickerProps> = ({ addBlock, clas
             {blockName}
           </StyledButton>
         ))}
+      </BlockSection>
+      <BlockSection>
+          <CreateButton onClick={() => createBlock()}>Create a Block</CreateButton>
       </BlockSection>
     </Container>
   );
