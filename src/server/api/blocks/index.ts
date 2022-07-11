@@ -10,3 +10,11 @@ export async function getBlocks(): Promise<ApiResponse> {
     return { statusCode: 500, data: { message: err.message }};
   }
 }
+export async function createBlocks(): Promise<ApiResponse> {
+  try {
+    const blocks: Block[] = await db.createBlocks();
+    return { statusCode: 200, data: blocks };
+  } catch (err) {
+    return { statusCode: 500, data: { message: err.message }};
+  }
+}
