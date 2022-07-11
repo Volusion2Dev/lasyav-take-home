@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import { Button } from "@blueprintjs/core";
 import { Icon } from "@blueprintjs/core";
 
 import blocks from "../components/blocks";
@@ -79,12 +79,28 @@ const TrashButton = styled.button`
   width: 30px;
 `;
 
+const ModeButton = styled(Button)`
+  background-color: #9fb3c8 !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: #102a43 !important;
+  font-weight: bold;
+  margin: 5px auto;
+  padding: 10px;
+  text-transform: capitalize;
+  width: 45%;
+  margin:10px 30px;
+`;
+const showdata = "Show SideBar"
+const hidedata = "Hide SideBar"
+
 interface SiteProps {
   activeIndex: number;
   blockList: Block[];
   className?: string;
   removeBlock: (index: number) => void;
   setActiveIndex: (index: number) => void;
+  sitetoIndex,
 }
 
 const site: React.FunctionComponent<SiteProps> = ({
@@ -93,6 +109,7 @@ const site: React.FunctionComponent<SiteProps> = ({
   className,
   removeBlock,
   setActiveIndex,
+  sitetoIndex,
 }) => {
   return (
     <Container className={className}>
@@ -127,6 +144,11 @@ const site: React.FunctionComponent<SiteProps> = ({
           <CloseSpacer onClick={() => setActiveIndex(-1)}>x</CloseSpacer>
         </Spacer>
       )}
+      <div>
+        <ModeButton onClick={() => sitetoIndex(hidedata)}>Preview</ModeButton>
+        &nbsp;
+        <ModeButton onClick={() => sitetoIndex(showdata)}>Edit</ModeButton>
+      </div>
     </Container>
   );
 };
